@@ -18,14 +18,20 @@ export class HomePage {
   public post_data
   public userId
   constructor(public navcontrol: NavController,public navparams:NavParams,
-    public usersPostsData:DataService,public commonsLikeService:CommonsService) {}
+    public usersPostsData:DataService,public commonsLikeService:CommonsService) {
+      var _self = this
+      _self.userId = _self.navparams.get('uid')
+    }
 
     ionViewDidLoad() {
       var _self = this
       _self.userId = _self.navparams.get('uid')
-     _self.usersPostsData.retrievePostsDataService(_self.userId).subscribe(posts=>{
-        _self.post_data = posts
-     })
+      //side menu profile data
+      setTimeout(()=>{
+        _self.usersPostsData.retrievePostsDataService(_self.userId).subscribe(posts=>{
+           _self.post_data = posts
+        })
+      },2000)
     }
     ionViewDidEnter(){
       var _self = this

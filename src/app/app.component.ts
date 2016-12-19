@@ -54,21 +54,24 @@ export class MyApp {
     var DataUserProfile = changeStatusUser.db
     dataQueryStatusUser.onAuthStateChanged((login)=>{
       if(login){
-        _self.userId = login.uid // user id parameter
+        var userId = login.uid
+        _self.userId = userId // user id parameter
         let loading = loadingcontrol.create({
-          content:'loading ... '
+          content:'logging ... '
         });
         loading.present();
         setTimeout(()=>{
-          _self.navigation.setRoot(HomePage,{uid:_self.userId})
-        },2000);
+          _self.navigation.setRoot(HomePage,{uid:userId})
+        },3000);
         setTimeout(()=>{
           loading.dismiss()
-        },3000)
+        },5000)
         //side menu profile data
-        DataQueryUser.retrieveProfileMenu(_self.userId).subscribe((profile)=>{
-          _self.profiles = profile
-        })
+        setTimeout(()=>{
+          DataQueryUser.retrieveProfileMenu(userId).subscribe((profile)=>{
+            _self.profiles = profile
+          })
+        },2000)
       }else{
         //back to start page
         //application did not get authentication
