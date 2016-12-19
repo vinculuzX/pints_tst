@@ -1,0 +1,29 @@
+page-signup {
+  ion-grid{
+    .avatar-image{
+      width:100%;
+      margin-bottom: 2em;
+      ion-col{
+        width:100%;
+      }
+      img{
+        width:125px;
+        height:125px;
+        object-fit: cover!important;
+        border-radius:50%;
+        background-color: color($colors,gray);
+      }
+      ion-fab{
+        margin-top:6em;
+        margin-left:-4.2em;
+      }
+    }
+
+    input{
+      width:100%;
+      padding:1.2em!important;
+      border:1px solid #ccc !important
+    }
+  }
+
+}

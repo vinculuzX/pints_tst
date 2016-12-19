@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="clrs-blue">
+    <ion-title>
+      <div class="title-app">Pics n' Tricks</div>
+    </ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <article class="post-card" *ngFor="let post of post_data">
+    <header (click)="viewUser(post.uid)">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="profile-avatar">
+            <div class="img-avatar">
+              <img [src]="post.avatarUrl">
+            </div>
+          </ion-col>
+          <ion-col class="profile-name">
+            <p>{{post.nickname}}</p>
+          </ion-col>
+          <ion-col class="datetime">
+            <time>{{post.time *-1 | timeago}}</time>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </header>
+    <!-- image full -->
+    <section class="image-full" (click)="viewPost(post.key)">
+      <img [src]="post.photoUrl" class="center-cropped" />
+    </section>
+    <!-- action like shared comment -->
+    <section class="post-action">
+      <ion-grid>
+        <ion-row>
+          <ion-col no-padding class="col-action" (click)="toggleLike(post,post.key,post.uid)">
+            <ion-icon name="heart" *ngIf="post.liked == true" color="clrs-blue"></ion-icon>
+            <ion-icon name="heart-outline" *ngIf="post.liked == false" color="gray"></ion-icon>
+              <a class="counter">{{post.likesCount}}</a>
+          </ion-col>
+          <ion-col no-padding class="col-action" (click)="viewPost(post.key)">
+            <ion-icon color="primary" *ngIf="post.commentCount > 0" name="chatbubbles"></ion-icon>
+            <ion-icon color="gray" *ngIf="post.commentCount == 0" name="chatbubbles"></ion-icon>
+            <a class="counter">{{post.commentCount}}</a>
+          </ion-col>
+          <ion-col class="col-theme">
+            {{post.theme}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
+    <!-- posts description -->
+    <section class="post-text" (click)="viewUser(post.uid)">
+      <b>{{post.nickname}}:</b>
+      {{post.title}}
+    </section>
+  </article>
+</ion-content>

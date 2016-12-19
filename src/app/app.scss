@@ -1,0 +1,99 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+//font app
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script|Molle:400i|Oswald|Rakkas|Ubuntu');
+// font Login
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaina|Indie+Flower');
+// menu-left SCSS
+*{
+  font-family: 'Ubuntu', sans-serif;
+}
+.menu-left{
+  background-color: color($colors,gray);
+}
+.user-profile{
+  .profile-picture{
+    width:75px;
+    height:75px;
+    border-radius: 50%;
+    margin-top: 1em;
+  }
+  h4{
+    font-size: 14pt;
+    color: color($colors,light);
+    font-weight: bold;
+    font-family: 'Ubuntu';
+    letter-spacing: 0.2em;
+  }
+}
+.bg-avatar{
+  box-sizing: padding-box;
+  height:150px;
+  background:color($colors,clrs-blue)
+}
+ion-list[inset]{
+  ion-item{
+    border-bottom:none!important;
+    background-color: color($colors,gray);
+    font-family: 'Ubuntu';
+  }
+}
+//post text
+.post-text{
+  padding:5px 12px;
+  font-size:9pt;
+  text-align: justify;
+  b{
+    font-size:10pt;
+  }
+}
+//profile name
+.profile-name{
+  margin: -1px 10px -1px -5px;
+  max-width:43.33333%;
+  font-size:12pt;
+  color:color($colors,clrs-black);
+  text-align: left;
+  font-family: 'Ubuntu';
+  p{
+    margin-top:0.55em;
+  }
+}
+//profile Avatar
+.profile-avatar{
+  max-width:23.3333%
+}
+.img-avatar{
+  margin:-1px 10px -1px -5px!important;
+  max-width:4.5rem;
+  max-height:4.5rem;
+  img{
+    padding:0.1rem;
+    background-color: color($colors,light);
+    border:1px solid color($colors,clrs-black);
+    width:4rem;
+    height:4rem;
+  }
+}
+// posts time
+.datetime{
+  font-size:9pt;
+  font-weight: bolder;
+  text-align: right;
+  color:color($colors,clrs-blue);
+  font-family: 'Oswald';
+}

@@ -1,0 +1,61 @@
+<!--
+  Generated template for the PostView page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar  color="clrs-blue">
+    <ion-title>Post</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <article *ngFor="let post of postView">
+    <header (click)="userView(post.uid)">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="profile-avatar">
+            <div class="img-avatar">
+              <img src="{{post.avatarUrl}}">
+            </div>
+          </ion-col>
+          <ion-col class="profile-name">
+            <p>{{post.nickname}}</p>
+          </ion-col>
+          <ion-col class="datetime">
+            <time>{{post.time * -1 | timeago}}</time>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </header>
+    <!-- picture -->
+    <section class="image-full">
+      <img src="{{post.photoUrl}}"/>
+    </section>
+    <!-- post theme and description -->
+    <section padding class="post-text">
+        <b>{{post.nickname}}:</b>
+          {{post.title}}
+    </section>
+    <!-- users comments -->
+    <div *ngFor="let comment of commentView">
+      <section *ngIf="commentView.length > 0" padding class="post-text" (click)="userView(comment.uid)">
+          <b>{{comment.nickname}}:</b>
+          {{comment.message}}
+        <br/>
+        <time class="time">  <ion-icon name="timer"></ion-icon> {{comment.time * -1| timeago}} </time>
+      </section>
+    </div>
+  </article>
+</ion-content>
+ <!-- Comments box -->
+ <ion-footer>
+  <ion-toolbar whatsapp class="messages-page-footer" position="bottom">
+    <ion-input [(ngModel)]="postComment" class="message-editor" placeholder="Type a comment"></ion-input>
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="postComment" class="message-editor-button" (click)="sendMessage()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

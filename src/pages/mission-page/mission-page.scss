@@ -1,0 +1,31 @@
+page-mission-page {
+
+  .block-content{
+    padding:1.2em;
+  }
+  .card-page-title{
+    font-size: 14pt;
+    font-family: 'Kaushan Script', cursive;
+  }
+  .card-mission-description{
+    font-size:12pt;
+    font-weight: bolder;
+    width:100%;
+    font-family: 'Rakkas', cursive;;
+  }
+  .card-bottom-button{
+    padding-top: 0.8em;
+    width:100%;
+  }
+  .card-mission-duration{
+    font-size:10pt;
+    font-family: 'Oswald', sans-serif;
+    width:100%!important;
+  }
+  .prospect-mission{
+    border-top: 3px solid color($colors,light);
+    width:100%;
+    font-size:5em;
+  }
+
+}

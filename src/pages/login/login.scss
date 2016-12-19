@@ -1,0 +1,42 @@
+page-login {
+  ion-grid{
+    .thin-row{
+      height:3.5em!important
+    }
+    ion-row{
+      ion-col{
+        text-align:center!important;
+      }
+    }
+    .img-logo{
+      width:100%;
+      img{
+      max-width:150px;
+      max-height:150px;
+      }
+    }
+    // .title-app{
+    //   width:100%;
+    //   font-size: 2.6em;
+    //   letter-spacing: 0.1em;
+    //   font-family: 'Baloo Bhaina', cursive;
+    //   font-weight:bolder;
+    //   color:color($colors,clrs-blue)
+    // }
+    // .subtitle-app{
+    //   width:100%;
+    //   font-size: 1.0em;
+    //   font-family: 'Indie Flower', cursive;
+    //   font-weight:400;
+    // }
+    input{
+      width:100%;
+      padding:1.2em!important;
+      border:1px solid #ccc !important
+    }
+    b{
+      text-align:left!important;
+      font-size: 10pt!important;
+    }
+  }
+}

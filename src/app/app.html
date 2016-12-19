@@ -1,0 +1,19 @@
+<ion-menu [content]="content">
+  <ion-content class="menu-left">
+    <!-- User Profile -->
+    <div text-center class="bg-avatar">
+      <a menuClose>
+        <div (click)="viewUser()" class="user-profile" *ngFor="let profile of profiles">
+          <img class="profile-picture" src="{{profile.avatarUrl ||  './assets/images/avatar.png' }}"/>
+          <h4>{{profile.nickname || 'none'}}</h4>
+        </div>
+      </a>
+    </div>
+    <ion-list inset>
+      <ion-item *ngFor="let page of pages" menuClose ion-item (click)="openPage(page.template)">
+        {{page.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

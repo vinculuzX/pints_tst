@@ -1,0 +1,62 @@
+page-home {
+  .title-app{
+    font-size:12pt;
+    font-family: 'Ubuntu';
+    letter-spacing:0.1em;
+  }
+  article{
+    box-sizing: border-box;
+    flex-direction: column;
+    -ms-flex-negative:0;
+    margin:0;
+    padding:0;
+    position:relative;
+    header{
+      padding:14px 12px!important;
+      width:100%;
+      height:64px;
+      background-color: color($colors,light);
+      box-sizing: border-box;
+      display: block;
+      ion-grid{
+        padding:0!important;
+        ion-row{
+          padding:0!important;
+          ion-col{
+            padding:0!important;
+          }
+        }
+      }
+    }
+  }
+  .post-card{
+    margin-bottom: 2.5em
+  }
+  //image full
+ .image-full{
+  //  border-top:1px solid color($colors,clrs-black);
+  //  border-bottom:1px solid color($colors,light);
+   box-shadow: inset 0 0 20px 0 color($colors,light);
+ }
+
+  //actions
+  .post-action{
+    padding:5px 12px;
+    ion-grid{
+      border-bottom: 1px solid color($colors,gray);
+    }
+  }
+  .counter{
+    font-size:9pt;
+    text-decoration: none;
+    color:color($colors,clrs-black);
+  }
+  .col-action{
+    max-width:15%;
+  }
+  .col-theme{
+    font-size:11pt;
+    text-align: right;
+    font-family: 'Kaushan Script';
+  }
+}
