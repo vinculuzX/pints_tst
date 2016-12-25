@@ -23,8 +23,18 @@
   </div>
   <div class="user-posts">
     <ion-grid no-padding>
-      <ion-row no-padding>
-        
+      <ion-row no-padding *ngFor="let post of posts;let i = index">
+        <template no-padding [ngIf]="i % 3 === 0">
+          <ion-col no-padding width-33 *ngIf=" i < posts.length">
+            <img [src]="posts[i].photoUrl" (click)="goPost(posts[i].key)">
+          </ion-col>
+          <ion-col no-padding width-33 *ngIf=" i+1 < posts.length">
+            <img [src]="posts[i+1].photoUrl" (click)="goPost(posts[i+1].key)">
+          </ion-col>
+          <ion-col no-padding width-33 *ngIf=" i+2 < posts.length">
+            <img [src]="posts[i+2].photoUrl" (click)="goPost(posts[i+2].key)">
+          </ion-col>
+        </template>
       </ion-row>
     </ion-grid>
   </div>

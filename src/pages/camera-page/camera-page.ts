@@ -27,6 +27,8 @@ export class CameraPagePage {
   public option = {
     quality:100,
     destinationType: Camera.DestinationType.FILE_URI,
+    sourceType: Camera.PictureSourceType.CAMERA,
+    encodingType: Camera.EncodingType.JPEG,
     targetWidth:900,
     targetHeight:900
   }

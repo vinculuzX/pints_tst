@@ -25,23 +25,26 @@
         </ion-row> -->
         <ion-row>
           <ion-col>
-            <input type="text" [(ngModel)]="profiles.nickname" name="nickname">
+            <input type="text" [(ngModel)]="profiles.nickname" maxlength="20" name="nickname">
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <input type="text" [(ngModel)]="profiles.firstname" name="firstname" placeholder="First Name">
+            <input type="text" [(ngModel)]="profiles.firstname"  maxlength="45" name="firstname" placeholder="First Name">
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <input type="text" [(ngModel)]="profiles.lastname" name="lastname" placeholder="Last Name">
+            <input type="text" [(ngModel)]="profiles.lastname" maxlength="45" name="lastname" placeholder="Last Name">
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <input type="date" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="profiles.birthday" name="birthday">
-          </ion-col>
+            <ion-item>
+              <ion-label>Borndate</ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY"  [(ngModel)]="profiles.birthday" name="birthday"></ion-datetime>
+            </ion-item>
+        </ion-col>
         </ion-row>
       </ion-grid>
     </form>

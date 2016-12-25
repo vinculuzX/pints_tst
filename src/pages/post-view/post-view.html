@@ -39,18 +39,26 @@
     </section>
     <!-- users comments -->
     <div *ngFor="let comment of commentView">
-      <section *ngIf="commentView.length > 0" padding class="post-text" (click)="userView(comment.uid)">
-          <b>{{comment.nickname}}:</b>
-          {{comment.message}}
-        <br/>
-        <time class="time">  <ion-icon name="timer"></ion-icon> {{comment.time * -1| timeago}} </time>
+      <section padding class="post-text" *ngIf="comment.deleteCommented != true">
+          <span (click)="userView(comment.uid)"><b>{{comment.nickname}}:</b> </span>
+            {{comment.message}}
+          <ion-grid no-padding>
+            <ion-row no-padding>
+              <ion-col no-padding class="width-25">
+                  <time class="time">  <ion-icon name="timer"></ion-icon> {{comment.time * -1| timeago}} </time>
+              </ion-col>
+              <ion-col *ngIf="comment.uid == userId" no-padding class="width-18" (click)="deleteComment(comment.commentId);comment.deleteCommented=true">
+                  <span color="danger" ion-text> <ion-icon name="trash"></ion-icon> trash</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
       </section>
     </div>
   </article>
 </ion-content>
  <!-- Comments box -->
  <ion-footer>
-  <ion-toolbar whatsapp class="messages-page-footer" position="bottom">
+  <ion-toolbar class="messages-page-footer" position="bottom">
     <ion-input [(ngModel)]="postComment" class="message-editor" placeholder="Type a comment"></ion-input>
     <ion-buttons end>
       <button ion-button icon-only *ngIf="postComment" class="message-editor-button" (click)="sendMessage()">

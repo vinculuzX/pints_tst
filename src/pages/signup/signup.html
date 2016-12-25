@@ -15,7 +15,7 @@ Ionic pages and navigation.
   <ion-grid padding>
     <ion-row class="avatar-image">
       <ion-col text-center>
-        <img [src]=" image || './assets/images/avatar.png'">
+        <img [src]="image || './assets/images/avatar.png'">
         <ion-fab (click)="goGallery()">
           <button ion-fab mini><ion-icon name="camera"></ion-icon></button>
         </ion-fab>
@@ -24,22 +24,26 @@ Ionic pages and navigation.
     <form [formGroup]="formRegister" (ngSubmit)="goRegister(formRegister)">
       <ion-row>
         <ion-col>
-          <input type="text" formControlName="email" placeholder="Email@email.com">
+          <input type="text" formControlName="email" maxlength="30"  placeholder="Email@email.com">
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <input type="password" formControlName="password" placeholder="My Password">
+          <input type="password" formControlName="password" maxlength="15" placeholder="My Password">
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <input type="text" formControlName="nickname" placeholder="Your Nickname Ex MR_UMPALUMPA :P">
+          <input type="text" formControlName="nickname" maxlength="20" placeholder="Your Nickname Ex MR_UMPALUMPA :P">
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <input type="date" formControlName="birthday">
+          <ion-item>
+            <ion-label>Borndate</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" formControlName="birthday"></ion-datetime>
+          </ion-item>
+          <!-- <input type="date" formControlName="birthday"> -->
         </ion-col>
       </ion-row>
       <ion-row>

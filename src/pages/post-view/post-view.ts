@@ -21,12 +21,12 @@ import {TimeAgoPipe} from '../../pipes/timeago-pipe'
   providers:[DataService]
 })
 export class PostViewPage {
-  public postId
-  public userId
-  public profiles
-  public postView
-  public postComment
-  public commentView
+  postId
+  userId
+  profiles
+  postView
+  postComment
+  commentView
   constructor(public navControl: NavController,public postViewData:DataService,public Navparams:NavParams,public logUserId:UserService) {
     var _self = this
     _self.postId = Navparams.get('pid')
@@ -43,7 +43,7 @@ export class PostViewPage {
     _self.logUserId.retrieveProfileMenu(_self.userId).subscribe(profile =>{
       _self.profiles = profile
     })
-    //rendering comments
+    // //rendering comments
     _self.postViewData.retriveCommentPost(_self.postId).subscribe(comments => {
       _self.commentView = comments
     })
@@ -52,7 +52,7 @@ export class PostViewPage {
     var _self = this
     _self.navControl.push(UserViewPage,{uid:userId})
   }
-  sendMessage(postId){
+  sendMessage(){
     var _self = this
     var comment = _self.postComment
     if(comment == undefined){
@@ -61,5 +61,9 @@ export class PostViewPage {
       _self.postViewData.createCommentPost(_self.postId,_self.userId,comment)
        _self.postComment = ""
     }
+  }
+  deleteComment(commentId,deleteCommented){
+    var _self = this
+    _self.postViewData.removeCommentsPost(_self.postId,_self.userId,commentId)
   }
 }

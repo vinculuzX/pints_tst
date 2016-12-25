@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController , NavParams } from 'ionic-angular';
+//pages
+import {PostViewPage} from '../post-view/post-view'
 //Service
 import {UserService} from '../../providers/user-service'
+import {CommonsService} from '../../providers/commons-service'
 
 /*
   Generated class for the UserView page.
@@ -12,12 +15,13 @@ import {UserService} from '../../providers/user-service'
 @Component({
   selector: 'page-user-view',
   templateUrl: 'user-view.html',
-    providers:[UserService]
+    providers:[UserService,CommonsService]
 })
 export class UserViewPage {
   public profiles
   public userId
-  constructor(public navCtrl: NavController,public profileUserData:UserService,public Navparams:NavParams) {
+  public posts
+  constructor(public navcontrol: NavController,public profileUserData:UserService,public Navparams:NavParams) {
     var _self = this
     _self.userId = Navparams.get('uid')
   }
@@ -27,5 +31,13 @@ export class UserViewPage {
     _self.profileUserData.retrieveProfileMenu(_self.userId).subscribe((profile)=>{
       _self.profiles = profile
     })
+    //loading images
+    _self.profileUserData.getImage(_self.userId).subscribe((images)=>{
+      _self.posts = images
+    })
+  }
+  goPost(postId){
+      var _self=this;
+      _self.navcontrol.push(PostViewPage,{pid:postId})
   }
 }

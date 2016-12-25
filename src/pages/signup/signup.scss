@@ -1,4 +1,16 @@
 page-signup {
+  ion-item{
+    width:100%!important;
+    border:1px solid #ccc !important;
+    font-size:10pt!important;
+    ion-label{
+      font-size:10pt!important;
+      color:#ccc!important;
+    }
+    .item-inner{
+      border-bottom:0!important;
+    }
+  }
   ion-grid{
     .avatar-image{
       width:100%;

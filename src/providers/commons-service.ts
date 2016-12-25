@@ -59,21 +59,22 @@ export class CommonsService {
     })
   }
   converterURItoBlob(imageUri){
-
+      return new Observable(observer=>{
       var sourceDirectory = imageUri.substring(0,imageUri.lastIndexOf('/') + 1)
       var sourceFilename = imageUri.substring(imageUri.lastIndexOf('/') + 1,imageUri.length)
       sourceFilename = sourceFilename.split('?').shift()
-      return new Observable(observer=>{
       File.copyFile(sourceDirectory,sourceFilename,cordova.file.dataDirectory,sourceFilename).then((result:any) =>{
-        File.readAsArrayBuffer(cordova.file.dataDirectory,result.name).then(fileUri =>{
+        File.readAsArrayBuffer(cordova.file.dataDirectory,result.name).then((fileUri) =>{
+            console.log(fileUri)
             var Bloby = new Blob([fileUri],{type:'image/jpeg'})
             observer.next(Bloby)
-        },error =>{
+        },(error) =>{
           console.log(error);
         })
-      },error =>{
+      },(error) =>{
         console.log(error);
       })
     })
   }
+
 }

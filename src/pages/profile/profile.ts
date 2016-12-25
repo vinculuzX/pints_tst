@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { NavController,NavParams } from 'ionic-angular';
 //pages
 import {EditProfilePage} from '../edit-profile/edit-profile'
+import {PostViewPage} from '../post-view/post-view'
 //Service
 import {UserService} from '../../providers/user-service'
+
 
 /*
   Generated class for the Profile page.
@@ -19,6 +21,7 @@ import {UserService} from '../../providers/user-service'
 export class ProfilePage {
   public userId:string
   public profiles:any
+  public posts
   constructor(public navcontrol: NavController,public profileUserData:UserService,public navparams:NavParams) {
     var _self = this;
     _self.userId = navparams.get('uid')
@@ -28,10 +31,18 @@ export class ProfilePage {
     _self.profileUserData.retrieveProfileMenu(_self.userId).subscribe((profile)=>{
       _self.profiles = profile
     })
+    //loading images
+    _self.profileUserData.getImage(_self.userId).subscribe((images)=>{
+      _self.posts = images
+    })
   }
   goEdit(){
     var _self=this;
     _self.navcontrol.push(EditProfilePage,{uid:_self.userId})
+  }
+  goPost(postId){
+      var _self=this;
+      _self.navcontrol.push(PostViewPage,{pid:postId})
   }
 
 }

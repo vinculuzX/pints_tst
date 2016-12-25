@@ -1,5 +1,11 @@
 page-profile {
-
+  ion-grid{
+    border-right: 3px solid #fff;
+    border-top: 3px solid #fff;
+  }
+  ion-col{
+    border-left:3px solid #fff;
+  }
   .profile-style{
     width:90px;
     height:90px;

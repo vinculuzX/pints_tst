@@ -43,7 +43,7 @@ createPostsDataService(userId:string,theme:string,title:string,file:any){
      }).then(data=>{
        var post_key = data.key
        userPublishDatabase.child(post_key).set({
-         photUrl:downloadURL,
+         photoUrl:downloadURL,
          date_posted:timestamp
        })
      })
@@ -113,7 +113,7 @@ createPostsDataService(userId:string,theme:string,title:string,file:any){
   }
   retrivePostsDataFollowing(postId:string,postUid:string){}
   // creating post comments
-  createCommentPost(postId:string,userId,dataComment:string){
+  createCommentPost(postId:string,userId:string,dataComment:string){
     var _self = this;
     var timestamp = -1 * (Number(new Date()))
     var postComment = _self.postData.db.child('comments').child(postId)
@@ -139,29 +139,40 @@ createPostsDataService(userId:string,theme:string,title:string,file:any){
     })
   }
 
-  //uploading image
-  uploadImage(fileBlob){
+  //deleting comments posts
+  removeCommentsPost(postId:string,userId:string,commentId:string){
+    var _self = this;
+    var postComment = _self.postData.db.child('comments').child(postId).child(commentId)
+    var postCommentCount = _self.postData.db.child('posts').child(postId).child('commentCount')
+    var removeProfileComment = _self.postData.db.child('users').child(userId).child('postcommented').child(postId).child(commentId)
+
+      postComment.remove()
+      removeProfileComment.remove()
+      postCommentCount.transaction(countComment => {
+        return countComment  - 1
+      })
 
   }
   // retriving post comments
   retriveCommentPost(postId){
+  return new Observable(observer=>{
     var _self = this
     var postViewComments = _self.postData.db.child('comments').child(postId)
     var usersProfileComment = _self.postData.db.child('users')
-    return new Observable(observer=>{
-      var CommentView
-      var CommentViewArray =[]
+    var CommentView
+    var CommentViewArray =[]
       postViewComments.on('child_added',comment_result=>{
         usersProfileComment.child(comment_result.val().uid).child('profile').on('value',profile_comment=>{
           CommentView = Object.assign({},{commentId:comment_result.key},{message:comment_result.val().message},
                             {time:comment_result.val().time},{nickname:profile_comment.val().nickname},
-                            {uid:comment_result.val().uid}
+                            {uid:comment_result.val().uid},{deleteCommented:false}
           )
           CommentViewArray.push(CommentView)
+          observer.next(CommentViewArray)
         },error =>{
           console.error(error)
         })
-        observer.next(CommentViewArray)
+
       },error =>{
         console.error(error)
       })

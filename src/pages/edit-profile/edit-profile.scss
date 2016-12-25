@@ -1,4 +1,16 @@
 page-edit-profile {
+  ion-item{
+    width:100%!important;
+    border:1px solid #ccc !important;
+    font-size:10pt!important;
+    ion-label{
+      font-size:10pt!important;
+      color:#ccc!important;
+    }
+    .item-inner{
+      border-bottom:0!important;
+    }
+  }
   input{
     width:100%;
     padding:1.2em!important;

@@ -80,4 +80,19 @@ getUserId(){
         }
       })
   }
+  getImage(userId){
+    var _self = this
+    var post_image = []
+    var userPhotoGallery = _self.userDataValue.child('users').child(userId).child('postposted')
+    return new Observable(observer =>{
+      var _i = 0
+      userPhotoGallery.orderByChild('date_posted').on('child_added',images =>{
+        post_image[_i] = Object.assign(images.val(),{key:images.key})
+        _i=_i+1
+      },error =>{
+        console.log(error)
+      })
+      observer.next(post_image)
+    })
+  }
 }

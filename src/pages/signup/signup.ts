@@ -26,9 +26,12 @@ export class SignupPage {
   public option = {
     quality:100,
     destinationType: Camera.DestinationType.FILE_URI,
-    cameraDirection:1,
+    sourceType: Camera.PictureSourceType.CAMERA,
+    encodingType: Camera.EncodingType.JPEG,
+    cameraDirection: 1,
     targetWidth:350,
     targetHeight:350,
+    correctOrientation: true,
   }
   public formRegister
   public image
@@ -62,7 +65,7 @@ export class SignupPage {
     if((email=="") || (password=="") || (nickname=="") || (birthday=="")){
       //showing errorMessage
       let toast = _self.toastcontrol.create({
-        message:'Error : Please Fill all fields :P',
+        message:'Please fill all fields',
         duration:1500,
         position:'top'
       })

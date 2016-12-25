@@ -25,7 +25,7 @@ loginUser(login:string,password:string){
       var loginAccount = _self.accountUser
       //verifying on database the user data
       // user authentication on firebase
-    return  loginAccount.signInWithEmailAndPassword(login,password).catch((error)=>{
+      loginAccount.signInWithEmailAndPassword(login,password).catch((error)=>{
         var errorCode = error.code;
         var errorMessage = error.message;
         var toastMessage:string;
@@ -50,8 +50,9 @@ loginUser(login:string,password:string){
     }).then((sucess)=>{
         if(sucess){
         console.log('Success Login user' , loginAccount.currentUser.uid)
+        // _self.navigation.setRoot(homepageroot,{uid:loginAccount.currentUser.uid})
         }
-      // _self.navigation.setRoot(homepageroot,{uid:loginAccount.currentUser.uid})
+
     })
   }
 
@@ -60,17 +61,44 @@ loginUser(login:string,password:string){
   createUser(login:string, password:string,nickname:string,birthday:string,file:any){
     var _self = this;
     var createProfile = _self.accountUser
-    createProfile.createUserWithEmailAndPassword(login,password).then(()=>{
-      var userId  = _self.accountUser.currentUser.uid
-      var avatar = userId + '_' + 'avatar.jpeg'
-      var uploadImage = _self.userAuth.storage.child('images').child(userId).child('avatar').child(avatar).put(file)
-        uploadImage.on('state_changed',(snapshot)=>{
-        },error =>{
-        },()=>{
-          var downloadURL = uploadImage.snapshot.downloadURL;
-          _self.DataUserProfile.saveRegisterDataUser(userId,nickname,birthday,downloadURL)
+          console.log('teste');
+                    console.log(file);
+    createProfile.createUserWithEmailAndPassword(login,password).catch((error)=>{
+      console.log('teste');
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      var toastMessage:string;
+      switch(error.code){
+        case"auth/email-already-in-use":
+        toastMessage = error.message
+        break;
+        case"auth/invalid-email":
+        toastMessage = error.message
+        break;
+        case"auth/operation-not-allowed":
+        toastMessage = error.message
+        break;
+      }
+      //showing errorMessage
+      let toast = _self.toastcontrol.create({
+        message:toastMessage,
+        duration:3500,
+        position:'bottom'
       })
-  })
+      toast.present()
+      }).then(()=>{
+        var userId  = _self.accountUser.currentUser.uid
+        var avatar = userId + '_' + 'avatar.jpeg'
+        var uploadImage = _self.userAuth.storage.child('images').child(userId).child('avatar').child(avatar).put(file)
+        console.log('teste');
+          uploadImage.on('state_changed',(snapshot)=>{
+          },error =>{
+          },()=>{
+            var downloadURL = uploadImage.snapshot.downloadURL;
+            _self.DataUserProfile.saveRegisterDataUser(userId,nickname,birthday,downloadURL)
+            // _self.navigation.setRoot(homepageroot,{uid:userId})
+        })
+    })
 }
 
   //verify user authentication status

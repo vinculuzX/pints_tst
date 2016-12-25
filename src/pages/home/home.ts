@@ -33,13 +33,12 @@ export class HomePage {
         })
       },2000)
     }
-    ionViewDidEnter(){
+    ionViewWillEnter(){
       var _self = this
-      _self.userId = _self.navparams.get('uid')
      _self.usersPostsData.retrievePostsDataService(_self.userId).subscribe(posts=>{
         _self.post_data = posts
      })
-    }
+  }
   //button like
   toggleLike(post,postId){
     var _self = this
