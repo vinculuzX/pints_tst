@@ -7,6 +7,8 @@ export class FirebaseService {
   public auth:any
   public db:any
   public storage:any
+  public credencial:any
+  public provider:any
   constructor() {
     {
         var _self = this;
@@ -22,6 +24,8 @@ export class FirebaseService {
         _self.auth = firebase.auth() // authentication
         _self.db = firebase.database().ref('/') // database real time
         _self.storage = firebase.storage().ref('/') // storage
+        _self.provider = new firebase.auth.FacebookAuthProvider(); // provider facebook
+        _self.credencial = firebase.auth.FacebookAuthProvider; // facebook credential
       }
   }
 }

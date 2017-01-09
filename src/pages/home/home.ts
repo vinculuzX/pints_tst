@@ -3,6 +3,7 @@ import { NavController , NavParams} from 'ionic-angular';
 //pages
 import { PostViewPage } from'../post-view/post-view'
 import { UserViewPage } from'../user-view/user-view'
+import { MissionPagePage } from '../mission-page/mission-page'
 //Service
 import { DataService } from '../../providers/data-service'
 import { CommonsService } from '../../providers/commons-service'
@@ -19,8 +20,8 @@ export class HomePage {
   public userId
   constructor(public navcontrol: NavController,public navparams:NavParams,
     public usersPostsData:DataService,public commonsLikeService:CommonsService) {
-      var _self = this
-      _self.userId = _self.navparams.get('uid')
+        var _self = this
+        _self.userId = _self.navparams.get('uid')
     }
 
     ionViewDidLoad() {
@@ -31,14 +32,14 @@ export class HomePage {
         _self.usersPostsData.retrievePostsDataService(_self.userId).subscribe(posts=>{
            _self.post_data = posts
         })
-      },2000)
+      },300)
     }
     ionViewWillEnter(){
-      var _self = this
-     _self.usersPostsData.retrievePostsDataService(_self.userId).subscribe(posts=>{
-        _self.post_data = posts
-     })
-  }
+        var _self = this
+       _self.usersPostsData.retrievePostsDataService(_self.userId).subscribe(posts=>{
+          _self.post_data = posts
+       })
+    }
   //button like
   toggleLike(post,postId){
     var _self = this
@@ -51,6 +52,15 @@ export class HomePage {
     }
     post.liked = !post.liked
   }
+  //refressher
+  doRefresh(refresher){
+    setTimeout(() => {
+      refresher.complete();
+    }, 4000);
+    setTimeout(() => {
+      this.ionViewWillEnter();
+    }, 3000);
+  }
   //go to userview page
   viewUser(userId){
     var _self = this;
@@ -60,6 +70,11 @@ export class HomePage {
   viewPost(postId){
     var _self = this;
     _self.navcontrol.push(PostViewPage,{pid:postId})
+  }
+  //go to mission page
+  goMission(){
+    var _self = this;
+    _self.navcontrol.push(MissionPagePage)
   }
 
 }

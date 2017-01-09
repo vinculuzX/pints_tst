@@ -1,17 +1,31 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" swipeEnabled="false"	>
+  <ion-header>
+    <ion-navbar color="clrs-blue">
+      <ion-title>
+        <div style="font-size:1.5rem!important">Pics n' tricks</div>
+      </ion-title>
+      <ion-buttons menuClose end>
+        <button ion-button icon-only>
+           <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
   <ion-content class="menu-left">
     <!-- User Profile -->
     <div text-center class="bg-avatar">
       <a menuClose>
         <div (click)="viewUser()" class="user-profile" *ngFor="let profile of profiles">
-          <img class="profile-picture" src="{{profile.avatarUrl ||  './assets/images/avatar.png' }}"/>
-          <h4>{{profile.nickname || 'none'}}</h4>
+          <img class="profile-picture"[src]="profile.avatarUrl"/>
+          <h4>{{profile.nickname}}</h4>
         </div>
       </a>
     </div>
     <ion-list inset>
       <ion-item *ngFor="let page of pages" menuClose ion-item (click)="openPage(page.template)">
-        {{page.title}}
+        <span>
+          {{page.title}}
+        </span>
       </ion-item>
     </ion-list>
   </ion-content>

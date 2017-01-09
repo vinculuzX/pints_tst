@@ -1,34 +1,27 @@
 page-login {
-  ion-grid{
-    .thin-row{
-      height:3.5em!important
+  // ion-content{
+  //   background-color: #2A71B7!important
+  // }
+  .logo-container{
+    height:14em;
+    background-color:#3472B9;
+    padding:0;
+    .img-logo{
+      width:100%;
+      margin-top:3em;
+      img{
+        max-width:150px;
+        max-height:150px;
+      }
     }
+  }
+  ion-grid{
+
     ion-row{
       ion-col{
         text-align:center!important;
       }
     }
-    .img-logo{
-      width:100%;
-      img{
-      max-width:150px;
-      max-height:150px;
-      }
-    }
-    // .title-app{
-    //   width:100%;
-    //   font-size: 2.6em;
-    //   letter-spacing: 0.1em;
-    //   font-family: 'Baloo Bhaina', cursive;
-    //   font-weight:bolder;
-    //   color:color($colors,clrs-blue)
-    // }
-    // .subtitle-app{
-    //   width:100%;
-    //   font-size: 1.0em;
-    //   font-family: 'Indie Flower', cursive;
-    //   font-weight:400;
-    // }
     input{
       width:100%;
       padding:1.2em!important;
@@ -39,4 +32,38 @@ page-login {
       font-size: 10pt!important;
     }
   }
+  // or
+  hr.style17 {
+    border-top: 1px solid #8c8b8b;
+    text-align: center;
+  }
+  hr.style17:after {
+    content: 'or';
+    display: inline-block;
+    position: relative;
+    top: -14px;
+    padding: 0 10px;
+    background: #FFF;
+    color: #8c8b8b;
+    font-size: 16px;
+  }
+  // social media
+  .social-login{
+    padding:5px 16px;
+    ion-icon{
+      margin-right: 0.8em;
+    }
+  }
+  .fb-bg {
+    background: #3b5998;
+  }
+
+  .fb-bg:hover{
+    cursor: pointer;
+  }
+
+  .fb-bg:active{
+    background: #354f88;
+  }
+
 }

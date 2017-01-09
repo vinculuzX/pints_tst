@@ -1,27 +1,39 @@
 <ion-header>
   <ion-navbar color="clrs-blue">
     <ion-title>
-      <div class="title-app">pics n' tricks</div>
+      <div class="title-app">Social Pictures</div>
     </ion-title>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <ion-buttons (click)="goMission()" end>
+      <button ion-button icon-only>
+        <ion-icon name="bulb"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        refreshingSpinner="crescent">
+      </ion-refresher-content>
+  </ion-refresher>
+  <!-- image cards -->
   <article class="post-card" *ngFor="let post of post_data">
-    <header (click)="viewUser(post.uid)">
-      <ion-grid>
-        <ion-row>
-          <ion-col class="profile-avatar">
+    <!-- header card -->
+    <header class="header-card" (click)="viewUser(post.uid)">
+      <ion-grid no-padding>
+        <ion-row no-padding>
+          <ion-col no-padding class="profile-avatar">
             <div class="img-avatar">
               <img [src]="post.avatarUrl">
             </div>
           </ion-col>
-          <ion-col class="profile-name">
+          <ion-col  no-padding class="profile-name">
             <p>{{post.nickname}}</p>
           </ion-col>
-          <ion-col class="datetime">
+          <ion-col no-padding class="datetime">
             <time>{{post.time *-1 | timeago}}</time>
           </ion-col>
         </ion-row>

@@ -1,4 +1,4 @@
-import { Injectable,EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 // firebase Service
@@ -25,7 +25,6 @@ getUserId(){
 //save the user data
   saveRegisterDataUser(userId:string,nickname:string,birthday:string,file:string){
     var _self = this
-    console.log(nickname,birthday,file)
     var registerUserProfile = _self.userDataValue.child('users').child(userId).child('profile')
     // inserting collection on database
     registerUserProfile.set({
@@ -69,15 +68,19 @@ getUserId(){
   updateDataUser(userId:string,firstname:string,lastname:string,nickname:string,birthday:string){
       var _self = this;
       var updateprofileUser = _self.userDataValue.child('users').child(userId).child('profile')
-      updateprofileUser.update({
-        firstname:firstname,
-        lastname:lastname,
-        nickname:nickname,
-        birthday:birthday
-      },(error)=>{
-        if (error == null){
-          console.log("Update has been success")
-        }
+      return new Promise((resolve,reject)=>{
+        updateprofileUser.update({
+          firstname:firstname,
+          lastname:lastname,
+          nickname:nickname,
+          birthday:birthday
+        },(error)=>{
+          if (error == null){
+            resolve()
+          }else{
+            reject(error)
+          }
+        })
       })
   }
   getImage(userId){

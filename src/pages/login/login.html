@@ -11,53 +11,34 @@
   </ion-navbar>
 
 </ion-header> -->
-<ion-content padding>
+<ion-content>
   <!-- login header -->
-  <ion-grid padding>
+  <ion-grid  class="logo-container">
     <ion-row>
       <ion-col class="img-logo">
-          <img src="./assets/images/logo_pints.png">
+          <img src="./assets/images/Pints_logo.png">
       </ion-col>
     </ion-row>
-    <!-- <ion-row text-center class="thin-row">
-      <ion-col>
-        <i><a class="title-app">Pin'ts</a></i>
-      </ion-col>
-    </ion-row> -->
-    <!-- <ion-row text-center class="thin-row">
-      <ion-col>
-        <a class="subtitle-app">Accept the challengers and enjoy!</a>
-      </ion-col>
-    </ion-row> -->
   </ion-grid>
   <!-- content form -->
-    <ion-grid text-center padding>
-        <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin(formLogin)">
-          <ion-row>
-            <ion-col>
-              <input type="text" formControlName="email" placeholder="Email@email.com">
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <input type="password" formControlName="password" placeholder="My Password">
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <button ion-button block color="twiiter" type="submit">Login</button>
-            </ion-col>
-          </ion-row>
-        </form>
-      <ion-row>
-        <ion-col>
-          <button ion-button block color="clrs-blue" (click)="goSignup()">Signup</button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col (click)="recoveryPassword()">
-            <b >I forgot my password!</b>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <div class="login-page">
+  <div class="form">
+    <form class="login-form" [formGroup]="formLogin">
+      <input type="text"  formControlName="email"  placeholder="email"/>
+      <input type="password"  formControlName="password" placeholder="password"/>
+      <button (click)="onSubmitLogin(formLogin)">login</button>
+      <p class="message"><b  (click)="recoveryPassword()">forgot Password? </b> <a href="#"  (click)="goSignup()">   Create an account</a></p>
+    </form>
+  </div>
+</div>
+<div padding>
+  <hr class="style17">
+</div>
+<ion-grid class="social-login">
+  <ion-row padding>
+    <ion-col>
+      <button class="fb-bg" ion-button block (click)="facebookLogin()">  <ion-icon name="logo-facebook"></ion-icon>    Sign in with facebook</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 </ion-content>

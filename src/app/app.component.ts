@@ -6,14 +6,9 @@ import  { LoadingController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 // pages
 import { HomePage } from '../pages/home/home';
-import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
-import { EditProfilePage} from '../pages/edit-profile/edit-profile';
-import { PostViewPage } from '../pages/post-view/post-view';
-import { UserViewPage } from '../pages/user-view/user-view';
 import { MissionPagePage } from '../pages/mission-page/mission-page';
-import { CameraPagePage } from '../pages/camera-page/camera-page';
 // services
 import {FirebaseService} from '../providers/firebase-service'
 import {UserService} from '../providers/user-service'
@@ -48,6 +43,7 @@ export class MyApp {
   constructor(platform: Platform,public changeStatusUser:FirebaseService,
     DataQueryUser:UserService,loadingcontrol:LoadingController,
     toastcontrol:ToastController) {
+
     //Authentication User
     var _self = this;
     var dataQueryStatusUser = changeStatusUser.auth
@@ -57,21 +53,23 @@ export class MyApp {
         var userId = login.uid
         _self.userId = userId // user id parameter
         let loading = loadingcontrol.create({
-          content:'logging ... '
+          spinner:'crescent',
+          content:'Aguarde ... ',
+          duration:5000
         });
         loading.present();
         setTimeout(()=>{
           _self.navigation.setRoot(HomePage,{uid:userId})
         },3000);
-        setTimeout(()=>{
-          loading.dismiss()
-        },5000)
         //side menu profile data
         setTimeout(()=>{
           DataQueryUser.retrieveProfileMenu(userId).subscribe((profile)=>{
             _self.profiles = profile
           })
         },2000)
+        setTimeout(()=>{
+          loading.dismiss()
+        },5000)
       }else{
         //back to start page
         //application did not get authentication
@@ -93,9 +91,10 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
+      StatusBar.overlaysWebView(true);
+      StatusBar.show();
+      StatusBar.backgroundColorByHexString('#0074D9');
       Splashscreen.hide();
-      // set to either landscape
       if (platform.is('ios') || platform.is('android')) {
         // set to either landscape
         ScreenOrientation.lockOrientation('portrait');

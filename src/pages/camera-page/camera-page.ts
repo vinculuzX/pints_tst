@@ -30,7 +30,8 @@ export class CameraPagePage {
     sourceType: Camera.PictureSourceType.CAMERA,
     encodingType: Camera.EncodingType.JPEG,
     targetWidth:900,
-    targetHeight:900
+    targetHeight:900,
+    correctOrientation: true,
   }
   public image
   public postTitle

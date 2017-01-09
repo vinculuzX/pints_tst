@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import  { LoadingController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
+import { Facebook } from 'ionic-native';
 // Service Firebase
 import { FirebaseService } from './firebase-service'
 import { UserService } from './user-service'
@@ -39,20 +40,22 @@ loginUser(login:string,password:string){
           case"auth/wrong-password":
           toastMessage = error.message
           break;
+          case "auth/weak-password":
+          toastMessage = error.message
+          break;
         }
         //showing errorMessage
         let toast = _self.toastcontrol.create({
           message:toastMessage,
           duration:3500,
+          cssClass:"toastError",
           position:'bottom'
         })
         toast.present()
-    }).then((sucess)=>{
-        if(sucess){
+    }).then((success)=>{
+        if(success){
         console.log('Success Login user' , loginAccount.currentUser.uid)
-        // _self.navigation.setRoot(homepageroot,{uid:loginAccount.currentUser.uid})
         }
-
     })
   }
 
@@ -61,28 +64,26 @@ loginUser(login:string,password:string){
   createUser(login:string, password:string,nickname:string,birthday:string,file:any){
     var _self = this;
     var createProfile = _self.accountUser
-          console.log('teste');
-                    console.log(file);
     createProfile.createUserWithEmailAndPassword(login,password).catch((error)=>{
-      console.log('teste');
       var errorCode = error.code;
       var errorMessage = error.message;
       var toastMessage:string;
       switch(error.code){
         case"auth/email-already-in-use":
-        toastMessage = error.message
+        toastMessage = errorCode + ' : ' + error.message
         break;
         case"auth/invalid-email":
-        toastMessage = error.message
+        toastMessage = errorCode + ' : ' + error.message
         break;
         case"auth/operation-not-allowed":
-        toastMessage = error.message
+        toastMessage = errorCode + ' : ' + error.message
         break;
       }
       //showing errorMessage
       let toast = _self.toastcontrol.create({
         message:toastMessage,
-        duration:3500,
+        cssClass:"toastError",
+        duration:1500,
         position:'bottom'
       })
       toast.present()
@@ -96,9 +97,39 @@ loginUser(login:string,password:string){
           },()=>{
             var downloadURL = uploadImage.snapshot.downloadURL;
             _self.DataUserProfile.saveRegisterDataUser(userId,nickname,birthday,downloadURL)
-            // _self.navigation.setRoot(homepageroot,{uid:userId})
         })
     })
+}
+
+// facebook login
+
+loginFacebook(){
+  var _self = this;
+  var provider = _self.userAuth.provider
+  var facebookConnect = _self.accountUser
+  Facebook.login(["public_profile", "email"]).then((response) => {
+    if (response.status === 'connected') {
+      let facebookCredential = _self.userAuth.credencial.credential(response.authResponse.accessToken);
+      facebookConnect.signInWithCredential(facebookCredential).catch((error)=> {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      }).then((authData)=>{
+        var userId = authData.uid
+        var nickname = authData.displayName
+        var downloadURL = authData.photoURL
+        _self.DataUserProfile.saveRegisterDataUser(userId,nickname," ",downloadURL)
+      })
+
+    } else {
+      alert('Facebook login failed');
+    }
+  });
 }
 
   //verify user authentication status
@@ -156,18 +187,16 @@ loginUser(login:string,password:string){
       let toast = _self.toastcontrol.create({
         message: 'email sent to redefinition',
         duration: 3000,
+        cssClass:"toastSuccess",
         position: 'top'
-      });
-      toast.onDidDismiss(() => {
       });
       toast.present();
     },(error)=>{
       let toast = _self.toastcontrol.create({
         message: error,
         duration: 3000,
-        position: 'top'
-      });
-      toast.onDidDismiss(() => {
+        cssClass:"toastError",
+        position: 'bottom'
       });
       toast.present();
     })

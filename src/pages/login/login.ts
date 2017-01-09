@@ -29,20 +29,25 @@ export class LoginPage {
         password:['',Validators.required]
       })
     }
-    ionViewDidLoad() {}
     // authentication Login
     onSubmitLogin(form){
       var _self = this
       var login = form.value.email
       var password = form.value.password
+
       // call authentication function
       _self.AuthUser.loginUser(login,password)
+    }
+    facebookLogin(){
+        var _self = this
+        _self.AuthUser.loginFacebook()
     }
     // going to Signup Page
     goSignup(){
       var _self = this
       _self.navcontrol.push(SignupPage)
     }
+    // recovering user password
     recoveryPassword(){
       var _self = this
       let prompt = _self.alertcontrol.create({

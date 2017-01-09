@@ -25,7 +25,6 @@ export class MissionPagePage {
     var _self = this
     _self.missionData.retrieveMissionService().subscribe(missions => {
       _self.missionsInfo = missions
-      console.log(missions)
     })
   }
   goCamera(theme){

@@ -13,7 +13,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div class="gallery-photo">
+  <div *ngIf="image" class="gallery-photo">
       <img [src]="image"/>
   </div>
 </ion-content>
